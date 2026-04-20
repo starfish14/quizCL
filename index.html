@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>题库问答练习</title>
+  <style>
+    :root {
+      --primary: #00418d;
+      --primary-strong: #0059c2;
+      --primary-soft: rgba(0, 65, 141, 0.24);
+      --accent: #55d4ff;
+      --bg-0: #030a17;
+      --bg-1: #081b3d;
+      --bg-2: #103062;
+      --card: rgba(7, 18, 43, 0.86);
+      --card-strong: #0b1f47;
+      --ink: #e8f1ff;
+      --muted: #a9bfdf;
+      --line: rgba(131, 170, 226, 0.33);
+      --danger: #f97373;
+      --danger-soft: rgba(249, 115, 115, 0.16);
+      --ok: #4ade80;
+      --ok-soft: rgba(74, 222, 128, 0.16);
+      --shadow: 0 28px 65px rgba(1, 7, 20, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(85, 212, 255, 0.14), transparent 36%),
+        radial-gradient(circle at 86% 8%, rgba(0, 89, 194, 0.26), transparent 34%),
+        linear-gradient(152deg, var(--bg-0) 0%, var(--bg-1) 50%, var(--bg-2) 100%);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(107, 151, 218, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(107, 151, 218, 0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 380px;
+      height: 380px;
+      right: -140px;
+      bottom: -150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(85, 212, 255, 0.24) 0%, rgba(0, 65, 141, 0.01) 72%);
+      filter: blur(6px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .quiz-card {
+      width: min(900px, 100%);
+      background: linear-gradient(155deg, rgba(7, 20, 49, 0.93), var(--card));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      animation: card-rise 0.45s ease-out;
+    }
+
+    .header {
+      padding: 22px 26px 12px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(0, 89, 194, 0.24), rgba(0, 65, 141, 0.02)),
+        linear-gradient(92deg, rgba(7, 18, 43, 0.88), rgba(11, 31, 71, 0.78));
+    }
+
+    .title {
+      margin: 0 0 8px;
+      font-size: clamp(20px, 3vw, 30px);
+      letter-spacing: 0.8px;
+      color: #f5faff;
+      text-shadow: 0 0 18px rgba(85, 212, 255, 0.2);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .body {
+      padding: 22px 26px 26px;
+    }
+
+    .question {
+      margin: 0 0 18px;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.5;
+      font-weight: 700;
+      color: #edf4ff;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+
+    .option {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(128, 164, 214, 0.34);
+      border-radius: 12px;
+      background: linear-gradient(120deg, rgba(10, 25, 56, 0.94), rgba(11, 31, 71, 0.78));
+      color: #dcebff;
+      padding: 12px 14px;
+      font-size: 16px;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .option:hover:not(:disabled) {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 18px rgba(85, 212, 255, 0.16);
+    }
+
+    .option.selected {
+      border-color: #66dcff;
+      background:
+        linear-gradient(120deg, rgba(0, 65, 141, 0.66), rgba(0, 89, 194, 0.45)),
+        rgba(9, 29, 62, 0.92);
+    }
+
+    .option.correct {
+      border-color: var(--ok);
+      background: linear-gradient(120deg, var(--ok-soft), rgba(8, 31, 28, 0.75));
+    }
+
+    .option.wrong {
+      border-color: var(--danger);
+      background: linear-gradient(120deg, var(--danger-soft), rgba(40, 16, 23, 0.75));
+    }
+
+    .explanation {
+      margin: 0 0 16px;
+      border-radius: 12px;
+      border: 1px dashed rgba(85, 212, 255, 0.62);
+      background: linear-gradient(120deg, rgba(0, 65, 141, 0.28), rgba(8, 26, 57, 0.8));
+      padding: 12px 14px;
+      color: #d3e7ff;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button.action {
+      border: 1px solid rgba(154, 189, 237, 0.34);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f7fbff;
+      cursor: pointer;
+      background: rgba(12, 34, 74, 0.92);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+    }
+
+    button.action:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.32);
+      filter: saturate(1.12);
+    }
+
+    #submitBtn {
+      background: linear-gradient(128deg, var(--primary) 0%, var(--primary-strong) 100%);
+      border-color: rgba(124, 201, 255, 0.6);
+      color: #fff;
+    }
+
+    #prevBtn {
+      background: linear-gradient(128deg, #12315f 0%, #1d467d 100%);
+      color: #fff;
+      display: inline-block;
+    }
+
+    #nextBtn {
+      background: linear-gradient(128deg, #0a4aa4 0%, #006ee4 100%);
+      color: #fff;
+      display: none;
+    }
+
+    #restartBtn {
+      background: linear-gradient(128deg, #0053b1 0%, #1ba2ff 100%);
+      color: #fff;
+      display: none;
+    }
+
+    button.action:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 14px;
+      min-height: 20px;
+    }
+
+    .file-fallback {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(93, 179, 248, 0.56);
+      background: linear-gradient(120deg, rgba(0, 65, 141, 0.3), rgba(7, 24, 55, 0.82));
+      color: #d8ebff;
+      display: none;
+    }
+
+    .file-fallback input[type="file"] {
+      margin-top: 8px;
+      width: 100%;
+      color: #e9f3ff;
+    }
+
+    .stats-panel {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(134, 172, 226, 0.34);
+      border-radius: 14px;
+      padding: 14px;
+      background: linear-gradient(150deg, rgba(7, 23, 54, 0.92), rgba(13, 38, 82, 0.72));
+    }
+
+    .stats-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #f3f8ff;
+    }
+
+    .stats-row {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bar-item {
+      display: grid;
+      gap: 4px;
+    }
+
+    .bar-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #d6e6ff;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(113, 151, 204, 0.24);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .bar-fill.ok {
+      background: linear-gradient(90deg, #2dd4bf, #4ade80);
+    }
+
+    .bar-fill.bad {
+      background: linear-gradient(90deg, #ef4444, #fb7185);
+    }
+
+    .bar-fill.a {
+      background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+    }
+
+    .bar-fill.b {
+      background: linear-gradient(90deg, #6366f1, #818cf8);
+    }
+
+    .bar-fill.c {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+
+    .bar-fill.d {
+      background: linear-gradient(90deg, #fb7185, #f97316);
+    }
+
+    .error {
+      border-radius: 12px;
+      background: rgba(127, 29, 29, 0.26);
+      border: 1px solid rgba(252, 165, 165, 0.56);
+      padding: 12px 14px;
+      color: #ffd7d7;
+      line-height: 1.6;
+    }
+
+    @keyframes card-rise {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+
+      .header,
+      .body {
+        padding: 16px;
+      }
+
+      .option {
+        font-size: 15px;
+      }
+
+      .actions {
+        gap: 8px;
+      }
+
+      button.action {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="quiz-card">
+    <section class="header">
+      <h1 class="title">高分子题库问答</h1>
+      <div class="meta">
+        <span id="progressText">正在加载题库...</span>
+        <span id="scoreText">得分：0</span>
+      </div>
+    </section>
+    <section class="body" id="quizBody">
+      <p class="question" id="questionText">正在加载，请稍候...</p>
+      <div class="options" id="optionsBox"></div>
+      <p class="explanation" id="explanationBox"></p>
+      <div class="actions">
+        <button class="action" id="prevBtn">上一题</button>
+        <button class="action" id="submitBtn" disabled>提交答案</button>
+        <button class="action" id="nextBtn">下一题</button>
+        <button class="action" id="restartBtn">重新开始</button>
+      </div>
+      <div class="status" id="statusText"></div>
+      <div class="file-fallback" id="fileFallback">
+        自动读取题库失败，请手动选择 <code>quiz_data.json</code>（按 UTF-8 读取）：
+        <input id="jsonFileInput" type="file" accept=".json,application/json" />
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      questions: [],
+      records: [],
+      index: 0,
+      score: 0,
+    };
+
+    const questionTextEl = document.getElementById("questionText");
+    const optionsBoxEl = document.getElementById("optionsBox");
+    const explanationEl = document.getElementById("explanationBox");
+    const progressTextEl = document.getElementById("progressText");
+    const scoreTextEl = document.getElementById("scoreText");
+    const statusTextEl = document.getElementById("statusText");
+    const prevBtn = document.getElementById("prevBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const fileFallbackEl = document.getElementById("fileFallback");
+    const jsonFileInputEl = document.getElementById("jsonFileInput");
+
+    function setStatus(text) {
+      statusTextEl.textContent = text;
+    }
+
+    function shuffle(arr) {
+      const list = [...arr];
+      for (let i = list.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      return list;
+    }
+
+    function getAnsweredCount() {
+      return state.records.filter((r) => r.submitted).length;
+    }
+
+    function recalcScore() {
+      state.score = state.records.filter((r) => r.submitted && r.isCorrect).length;
+      scoreTextEl.textContent = `得分：${state.score}`;
+    }
+
+    function resetButtonVisibility() {
+      prevBtn.style.display = "inline-block";
+      submitBtn.style.display = "inline-block";
+      nextBtn.style.display = "inline-block";
+      restartBtn.style.display = "none";
+    }
+
+    function renderQuestion() {
+      const total = state.questions.length;
+      const current = state.questions[state.index];
+      const record = state.records[state.index];
+
+      recalcScore();
+      progressTextEl.textContent = `进度：第 ${state.index + 1} / ${total} 题（已提交 ${getAnsweredCount()} / ${total}）`;
+      questionTextEl.textContent = current.questionText;
+      explanationEl.style.display = "none";
+      explanationEl.textContent = "";
+      fileFallbackEl.style.display = "none";
+
+      resetButtonVisibility();
+      prevBtn.disabled = state.index === 0;
+      nextBtn.disabled = false;
+      nextBtn.textContent = state.index === total - 1 ? "查看统计" : "下一题";
+      submitBtn.disabled = record.selectedIndex === -1 || record.submitted;
+
+      optionsBoxEl.innerHTML = "";
+      current.options.forEach((optText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.type = "button";
+        btn.textContent = optText;
+
+        if (idx === record.selectedIndex) {
+          btn.classList.add("selected");
+        }
+
+        btn.addEventListener("click", () => {
+          if (record.submitted) return;
+          record.selectedIndex = idx;
+          renderQuestion();
+        });
+        optionsBoxEl.appendChild(btn);
+      });
+
+      if (record.submitted) {
+        const optionEls = [...optionsBoxEl.children];
+        optionEls.forEach((el, idx) => {
+          el.disabled = true;
+          if (idx === current.correctAnswerIndex) {
+            el.classList.add("correct");
+          }
+          if (idx === record.selectedIndex && !record.isCorrect) {
+            el.classList.add("wrong");
+          }
+        });
+        explanationEl.innerHTML = `<strong>解析：</strong>${current.explanation || "暂无解析"}`;
+        explanationEl.style.display = "block";
+        submitBtn.disabled = true;
+        setStatus(record.isCorrect ? "本题回答正确，可前后切题。" : "本题回答错误，可前后切题。");
+      } else {
+        setStatus("请选择一个选项并提交，本题提交后可查看解析。");
+      }
+    }
+
+    function markAnswer() {
+      const current = state.questions[state.index];
+      const record = state.records[state.index];
+      if (record.selectedIndex === -1 || record.submitted) return;
+
+      record.submitted = true;
+      record.isCorrect = record.selectedIndex === current.correctAnswerIndex;
+      recalcScore();
+      renderQuestion();
+    }
+
+    function movePrev() {
+      if (state.index === 0) return;
+      state.index -= 1;
+      renderQuestion();
+    }
+
+    function showFinalStats() {
+      const total = state.questions.length;
+      const correct = state.records.filter((r) => r.submitted && r.isCorrect).length;
+      const wrong = state.records.filter((r) => r.submitted && !r.isCorrect).length;
+      const accuracy = total > 0 ? (correct / total) * 100 : 0;
+      const optionCounts = { A: 0, B: 0, C: 0, D: 0 };
+
+      state.records.forEach((r, idx) => {
+        if (!r.submitted || r.selectedIndex === -1) return;
+        const opt = state.questions[idx].options[r.selectedIndex] || "";
+        const m = opt.match(/^([A-D])/i);
+        if (m) {
+          optionCounts[m[1].toUpperCase()] += 1;
+        }
+      });
+
+      const safePct = (value, max) => (max > 0 ? ((value / max) * 100).toFixed(1) : "0.0");
+      const maxOption = Math.max(optionCounts.A, optionCounts.B, optionCounts.C, optionCounts.D, 1);
+
+      progressTextEl.textContent = `已完成：${total} / ${total} 题`;
+      scoreTextEl.textContent = `得分：${correct}`;
+      questionTextEl.textContent = "答题统计";
+      explanationEl.style.display = "none";
+
+      optionsBoxEl.innerHTML = `
+        <section class="stats-panel">
+          <h3 class="stats-title">成绩总览</h3>
+          <div>正确 ${correct} 题，错误 ${wrong} 题，正确率 ${accuracy.toFixed(1)}%</div>
+          <div class="stats-row">
+            <div class="bar-item">
+              <div class="bar-head"><span>正确</span><span>${correct}/${total}</span></div>
+              <div class="bar-track"><div class="bar-fill ok" style="width:${safePct(correct, total)}%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-head"><span>错误</span><span>${wrong}/${total}</span></div>
+              <div class="bar-track"><div class="bar-fill bad" style="width:${safePct(wrong, total)}%"></div></div>
+            </div>
+          </div>
+        </section>
+        <section class="stats-panel">
+          <h3 class="stats-title">选项选择分布（条形图）</h3>
+          <div class="stats-row">
+            <div class="bar-item">
+              <div class="bar-head"><span>A</span><span>${optionCounts.A}</span></div>
+              <div class="bar-track"><div class="bar-fill a" style="width:${safePct(optionCounts.A, maxOption)}%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-head"><span>B</span><span>${optionCounts.B}</span></div>
+              <div class="bar-track"><div class="bar-fill b" style="width:${safePct(optionCounts.B, maxOption)}%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-head"><span>C</span><span>${optionCounts.C}</span></div>
+              <div class="bar-track"><div class="bar-fill c" style="width:${safePct(optionCounts.C, maxOption)}%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-head"><span>D</span><span>${optionCounts.D}</span></div>
+              <div class="bar-track"><div class="bar-fill d" style="width:${safePct(optionCounts.D, maxOption)}%"></div></div>
+            </div>
+          </div>
+        </section>
+      `;
+
+      prevBtn.style.display = "none";
+      submitBtn.style.display = "none";
+      nextBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+      setStatus("统计已生成，可点击“重新开始”继续练习。");
+    }
+
+    function moveNext() {
+      const currentRecord = state.records[state.index];
+      if (!currentRecord.submitted) {
+        setStatus("请先提交当前题目，再进入下一步。");
+        return;
+      }
+      if (state.index === state.questions.length - 1) {
+        showFinalStats();
+        return;
+      }
+      state.index += 1;
+      renderQuestion();
+    }
+
+    function restartQuiz() {
+      startWithQuestions(state.questions);
+    }
+
+    function startWithQuestions(questions) {
+      const randomized = shuffle(questions);
+      state.questions = randomized;
+      state.records = randomized.map(() => ({
+        selectedIndex: -1,
+        submitted: false,
+        isCorrect: false,
+      }));
+      state.index = 0;
+      state.score = 0;
+      jsonFileInputEl.value = "";
+      fileFallbackEl.style.display = "none";
+      renderQuestion();
+    }
+
+    async function parseQuestionArrayFromText(text) {
+      const parsed = JSON.parse(text);
+      if (!parsed || !Array.isArray(parsed.questions)) {
+        throw new Error("题库格式不正确：缺少 questions 数组");
+      }
+      return parsed.questions;
+    }
+
+    async function loadQuizDataUtf8() {
+      const response = await fetch("./quiz_data.json", { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`读取题库失败，HTTP ${response.status}`);
+      }
+      const buf = await response.arrayBuffer();
+      const text = new TextDecoder("utf-8", { fatal: false }).decode(buf);
+      return parseQuestionArrayFromText(text);
+    }
+
+    async function parseJsonFileUtf8(file) {
+      const buf = await file.arrayBuffer();
+      const text = new TextDecoder("utf-8", { fatal: false }).decode(buf);
+      return parseQuestionArrayFromText(text);
+    }
+
+    function showError(msg) {
+      document.getElementById("quizBody").innerHTML = `
+        <div class="error">
+          <strong>加载失败：</strong>${msg}<br/>
+          请确认当前目录下存在 <code>quiz_data.json</code>。
+        </div>`;
+      progressTextEl.textContent = "进度：--";
+      scoreTextEl.textContent = "得分：--";
+    }
+
+    function showFilePickerFallback(msg) {
+      progressTextEl.textContent = "进度：--";
+      scoreTextEl.textContent = "得分：--";
+      questionTextEl.textContent = "题库自动加载失败";
+      optionsBoxEl.innerHTML = "";
+      explanationEl.style.display = "none";
+      prevBtn.style.display = "none";
+      submitBtn.style.display = "none";
+      nextBtn.style.display = "none";
+      restartBtn.style.display = "none";
+      setStatus(`自动加载失败：${msg}`);
+      fileFallbackEl.style.display = "block";
+    }
+
+    prevBtn.addEventListener("click", movePrev);
+    submitBtn.addEventListener("click", markAnswer);
+    nextBtn.addEventListener("click", moveNext);
+    restartBtn.addEventListener("click", restartQuiz);
+
+    jsonFileInputEl.addEventListener("change", async () => {
+      const file = jsonFileInputEl.files && jsonFileInputEl.files[0];
+      if (!file) return;
+      setStatus("正在读取并解析本地题库...");
+      try {
+        const questions = await parseJsonFileUtf8(file);
+        startWithQuestions(questions);
+      } catch (err) {
+        setStatus(`解析失败：${err instanceof Error ? err.message : String(err)}`);
+      }
+    });
+
+    window.addEventListener("keydown", (ev) => {
+      if (ev.key >= "1" && ev.key <= "4") {
+        const idx = Number(ev.key) - 1;
+        const optionEl = optionsBoxEl.children[idx];
+        if (optionEl instanceof HTMLButtonElement) {
+          optionEl.click();
+        }
+        return;
+      }
+      if (ev.key === "ArrowLeft") {
+        movePrev();
+        return;
+      }
+      if (ev.key === "ArrowRight") {
+        moveNext();
+      }
+    });
+
+    (async () => {
+      try {
+        const loaded = await loadQuizDataUtf8();
+        startWithQuestions(loaded);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        if (window.location.protocol === "file:") {
+          showFilePickerFallback(msg);
+          return;
+        }
+        showError(msg);
+      }
+    })();
+  </script>
+</body>
+</html>

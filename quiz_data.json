@@ -1,0 +1,554 @@
+{
+  "questions": [
+    {
+      "questionText": "高分子材料的玻璃化转变温度（Tg）是指？",
+      "options": [
+        "A. 材料从液态变为固态的温度",
+        "B. 材料从玻璃态转变为高弹态的温度",
+        "C. 材料开始分解的温度",
+        "D. 材料熔融的温度"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "Tg是高分子链段开始运动的临界温度，标志着从玻璃态到高弹态的转变。"
+    },
+    {
+      "questionText": "下列哪种力学性能表征材料抵抗变形的能力？",
+      "options": [
+        "A. 韧性",
+        "B. 硬度",
+        "C. 弹性模量",
+        "D. 伸长率"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "弹性模量又称杨氏模量，反映材料在弹性范围内抵抗形变的能力。"
+    },
+    {
+      "questionText": "高分子链的柔顺性主要取决于？",
+      "options": [
+        "A. 分子量大小",
+        "B. 分子链的极性和空间位阻",
+        "C. 结晶度高低",
+        "D. 交联程度"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "分子链极性越小、位阻越小，柔顺性越好。"
+    },
+    {
+      "questionText": "下列哪种现象属于高分子材料的黏弹性表现？",
+      "options": [
+        "A. 拉伸后完全恢复原状",
+        "B. 受力后立即产生很大形变",
+        "C. 应力保持不变时形变随时间增大",
+        "D. 断裂前无明显形变"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "应力不变形变随时间增加是蠕变，属于黏弹性特征。"
+    },
+    {
+      "questionText": "高分子材料的结晶度提高会导致？",
+      "options": [
+        "A. 透明度增加",
+        "B. 弹性增强",
+        "C. 密度增大",
+        "D. 耐化学性下降"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "结晶使分子排列紧密，密度增大。"
+    },
+    {
+      "questionText": "高分子材料的熔融温度（Tm）是指？",
+      "options": [
+        "A. 结晶态变为非晶态的温度",
+        "B. 玻璃态变为高弹态的温度",
+        "C. 高弹态变为黏流态的温度",
+        "D. 材料开始燃烧的温度"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "Tm是结晶高分子熔融时的温度，即结晶态转非晶态。"
+    },
+    {
+      "questionText": "下列哪种方法可提高高分子材料的耐热性？",
+      "options": [
+        "A. 降低分子量",
+        "B. 增加分子链的柔性",
+        "C. 引入芳香环结构",
+        "D. 减少交联度"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "芳香环结构能增强分子间作用力，提高耐热性。"
+    },
+    {
+      "questionText": "表征高分子材料在冲击载荷下抵抗断裂能力的是？",
+      "options": [
+        "A. 冲击强度",
+        "B. 屈服强度",
+        "C. 弹性模量",
+        "D. 硬度"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "冲击强度反映材料抗冲击断裂的能力。"
+    },
+    {
+      "questionText": "高分子溶液的黏度随剪切速率增大而减小的现象称为？",
+      "options": [
+        "A. 牛顿流动",
+        "B. 剪切增稠",
+        "C. 剪切稀化",
+        "D. 触变性"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "剪切稀化是指黏度随剪切速率增加而降低。"
+    },
+    {
+      "questionText": "下列哪种结构的高分子材料通常具有较好的弹性？",
+      "options": [
+        "A. 高度结晶结构",
+        "B. 线性非晶结构",
+        "C. 交联网络结构",
+        "D. 支化程度高的结构"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "适度交联的网络结构能使材料在外力作用后恢复原状，弹性较好。"
+    },
+    {
+      "questionText": "玻璃化转变温度（Tg）与熔融温度（Tm）的关系通常是？",
+      "options": [
+        "A. Tg ≈ Tm",
+        "B. Tg ≈ 0.5-0.8Tm（绝对温度）",
+        "C. Tg > Tm",
+        "D. 无固定关系"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "对结晶高分子，Tg一般为Tm的0.5-0.8倍（绝对温度）。"
+    },
+    {
+      "questionText": "高分子材料在长期应力作用下，即使应力小于屈服强度也会发生断裂的现象称为？",
+      "options": [
+        "A. 疲劳断裂",
+        "B. 脆性断裂",
+        "C. 韧性断裂",
+        "D. 蠕变断裂"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "疲劳断裂是长期交变应力或静态应力下的断裂。"
+    },
+    {
+      "questionText": "下列哪种因素会使高分子材料的Tg升高？",
+      "options": [
+        "A. 加入增塑剂",
+        "B. 提高分子量",
+        "C. 降低交联度",
+        "D. 增加分子链的柔性"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "分子量增大，分子间作用力增强，Tg升高。"
+    },
+    {
+      "questionText": "高分子材料的介电常数主要与哪种结构因素有关？",
+      "options": [
+        "A. 分子链长度",
+        "B. 分子极性",
+        "C. 结晶度",
+        "D. 分子量分布"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "分子极性越大，介电常数越高。"
+    },
+    {
+      "questionText": "下列哪种属于热固性高分子材料？",
+      "options": [
+        "A. 聚乙烯",
+        "B. 环氧树脂",
+        "C. 聚丙烯",
+        "D. 聚苯乙烯"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "环氧树脂固化后形成交联结构，属于热固性材料。"
+    },
+    {
+      "questionText": "表征高分子材料拉伸至断裂时的伸长程度的是？",
+      "options": [
+        "A. 屈服伸长率",
+        "B. 断裂伸长率",
+        "C. 弹性回复率",
+        "D. 应变硬化率"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "断裂伸长率是材料断裂时的伸长量与原长的比值。"
+    },
+    {
+      "questionText": "高分子链的末端距是指？",
+      "options": [
+        "A. 分子链两个末端之间的直线距离",
+        "B. 分子链的长度",
+        "C. 分子链中重复单元的数量",
+        "D. 分子链的柔顺性参数"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "末端距是高分子链两端点之间的直线距离。"
+    },
+    {
+      "questionText": "下列哪种现象不属于高分子材料的力学松弛现象？",
+      "options": [
+        "A. 蠕变",
+        "B. 应力松弛",
+        "C. 弹性形变",
+        "D. 滞后现象"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "弹性形变是瞬时可恢复的，不属于力学松弛。"
+    },
+    {
+      "questionText": "提高高分子材料结晶度的方法不包括？",
+      "options": [
+        "A. 缓慢冷却",
+        "B. 加入成核剂",
+        "C. 拉伸取向",
+        "D. 快速冷却"
+      ],
+      "correctAnswerIndex": 3,
+      "explanation": "快速冷却会使分子链来不及规整排列，降低结晶度。"
+    },
+    {
+      "questionText": "下列哪种高分子材料的耐溶剂性较好？",
+      "options": [
+        "A. 线性非晶高分子",
+        "B. 高度交联高分子",
+        "C. 低分子量线性高分子",
+        "D. 支化度高的高分子"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "高度交联的高分子因分子链间形成网络，溶剂难以渗透，耐溶剂性好。"
+    },
+    {
+      "questionText": "高分子材料在一定温度下，应力随时间延长而逐渐减小的现象称为？",
+      "options": [
+        "A. 蠕变",
+        "B. 应力松弛",
+        "C. 疲劳",
+        "D. 屈服"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "应力松弛是应力随时间延长而减小的现象。"
+    },
+    {
+      "questionText": "下列哪种测试方法可用来测定高分子材料的玻璃化转变温度？",
+      "options": [
+        "A. 拉伸试验",
+        "B. 冲击试验",
+        "C. 差示扫描量热法（DSC）",
+        "D. 硬度测试"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "DSC可通过热流变化测定Tg。"
+    },
+    {
+      "questionText": "高分子链的构型是指分子中原子的？",
+      "options": [
+        "A. 空间排列方式（不可改变）",
+        "B. 空间排列方式（可通过单键旋转改变）",
+        "C. 链段的运动状态",
+        "D. 分子量分布情况"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "构型是分子中原子的固定空间排列，无法通过单键旋转改变。"
+    },
+    {
+      "questionText": "下列哪种高分子材料具有热塑性？",
+      "options": [
+        "A. 酚醛树脂",
+        "B. 不饱和聚酯",
+        "C. 聚氯乙烯",
+        "D. 环氧树脂"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "聚氯乙烯是线性结构，具有热塑性，可重复加工。"
+    },
+    {
+      "questionText": "高分子材料的透气性主要取决于？",
+      "options": [
+        "A. 分子量大小",
+        "B. 分子链的堆积密度和极性",
+        "C. 交联程度",
+        "D. 玻璃化转变温度"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "分子链堆积越疏松、极性越小，透气性越好。"
+    },
+    {
+      "questionText": "下列哪种单体聚合后得到的是聚丁二烯？",
+      "options": [
+        "A. 乙烯",
+        "B. 丁二烯",
+        "C. 丙烯",
+        "D. 苯乙烯"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "丁二烯单体通过加聚反应生成聚丁二烯。"
+    },
+    {
+      "questionText": "高分子材料发生老化的主要原因不包括？",
+      "options": [
+        "A. 光氧化",
+        "B. 热降解",
+        "C. 机械应力",
+        "D. 结晶度升高"
+      ],
+      "correctAnswerIndex": 3,
+      "explanation": "结晶度升高一般不会导致材料老化，光、热、应力均会引发老化。"
+    },
+    {
+      "questionText": "自由基聚合的引发方式不包括？",
+      "options": [
+        "A. 热引发",
+        "B. 光引发",
+        "C. 离子引发",
+        "D. 引发剂引发"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "离子引发属于离子聚合范畴，不属于自由基聚合引发方式。"
+    },
+    {
+      "questionText": "下列哪种高分子属于天然高分子？",
+      "options": [
+        "A. 尼龙",
+        "B. 纤维素",
+        "C. 聚酯",
+        "D. 聚氨酯"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "纤维素是植物中天然存在的高分子，其余为合成高分子。"
+    },
+    {
+      "questionText": "缩聚反应的特点是？",
+      "options": [
+        "A. 无小分子副产物",
+        "B. 伴随小分子副产物生成",
+        "C. 仅能形成线性结构",
+        "D. 反应速率极快且不可逆"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "缩聚反应通常会生成水、醇等小分子副产物。"
+    },
+    {
+      "questionText": "立构规整性高分子不包括？",
+      "options": [
+        "A. 全同立构",
+        "B. 间同立构",
+        "C. 无规立构",
+        "D. 交联立构"
+      ],
+      "correctAnswerIndex": 3,
+      "explanation": "交联属于分子链连接方式，并非立构规整性分类。"
+    },
+    {
+      "questionText": "增塑剂加入高分子材料后会使Tg？",
+      "options": [
+        "A. 升高",
+        "B. 降低",
+        "C. 不变",
+        "D. 先升后降"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "增塑剂削弱分子间作用力，使链段运动更容易，玻璃化温度降低。"
+    },
+    {
+      "questionText": "下列哪种属于高分子的聚集态结构？",
+      "options": [
+        "A. 键接方式",
+        "B. 晶态与非晶态",
+        "C. 单体结构",
+        "D. 聚合度"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "晶态、非晶态、取向态等属于高分子聚集态结构。"
+    },
+    {
+      "questionText": "材料在交变应力作用下出现形变滞后于应力的现象称为？",
+      "options": [
+        "A. 蠕变",
+        "B. 应力松弛",
+        "C. 滞后",
+        "D. 屈服"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "滞后现象是指形变随应力变化出现时间上的滞后。"
+    },
+    {
+      "questionText": "共聚改性的主要目的是？",
+      "options": [
+        "A. 提高分子量",
+        "B. 改善综合性能",
+        "C. 增加结晶度",
+        "D. 加快聚合速率"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "共聚可结合不同 monomer 优点，改善高分子综合使用性能。"
+    },
+    {
+      "questionText": "高分子熔体的流动状态主要属于？",
+      "options": [
+        "A. 牛顿流体",
+        "B. 非牛顿流体",
+        "C. 理想弹性体",
+        "D. 理想黏性体"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "高分子熔体黏度随剪切条件变化，属于典型非牛顿流体。"
+    },
+    {
+      "questionText": "交联作用对高分子性能的影响是？",
+      "options": [
+        "A. 可熔融流动",
+        "B. 提高耐热性与强度",
+        "C. 降低硬度",
+        "D. 增强溶解性"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "交联形成网络结构，可显著提高耐热性、机械强度与尺寸稳定性。"
+    },
+    {
+      "questionText": "下列哪种方法常用于测定高分子的分子量？",
+      "options": [
+        "A. 红外光谱",
+        "B. 凝胶渗透色谱（GPC）",
+        "C. 扫描电镜",
+        "D. 拉伸试验"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "凝胶渗透色谱是测定高分子分子量及分布的常用方法。"
+    },
+    {
+      "questionText": "无定型高分子在Tg以下处于？",
+      "options": [
+        "A. 玻璃态",
+        "B. 高弹态",
+        "C. 黏流态",
+        "D. 结晶态"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "Tg以下无定型高分子链段冻结，表现为硬脆的玻璃态。"
+    },
+    {
+      "questionText": "下列哪种高分子不易结晶？",
+      "options": [
+        "A. 线性聚乙烯",
+        "B. 全同聚丙烯",
+        "C. 无规聚苯乙烯",
+        "D. 聚对苯二甲酸乙二醇酯"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "无规聚苯乙烯链结构不规整，难以形成有序结晶结构。"
+    },
+    {
+      "questionText": "高分子材料的屈服现象主要发生在？",
+      "options": [
+        "A. 弹性阶段",
+        "B. 塑性形变阶段",
+        "C. 断裂瞬间",
+        "D. 玻璃态低温区"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "屈服是材料由弹性形变进入塑性不可逆形变的标志。"
+    },
+    {
+      "questionText": "下列哪种属于逐步聚合反应？",
+      "options": [
+        "A. 乙烯自由基聚合",
+        "B. 尼龙缩聚",
+        "C. 苯乙烯乳液聚合",
+        "D. 异丁烯阳离子聚合"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "尼龙由二元酸与二元胺缩聚而成，属于典型逐步聚合。"
+    },
+    {
+      "questionText": "填料加入高分子材料的主要作用是？",
+      "options": [
+        "A. 降低成本并增强性能",
+        "B. 提高透明度",
+        "C. 增加柔顺性",
+        "D. 促进熔融"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "填料可降低成本，同时提升强度、耐热性等性能。"
+    },
+    {
+      "questionText": "高分子链越长，其熔体黏度通常？",
+      "options": [
+        "A. 越低",
+        "B. 越高",
+        "C. 不变",
+        "D. 无规律"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "分子量增大、链变长，分子缠结增多，熔体黏度显著升高。"
+    },
+    {
+      "questionText": "下列哪种现象会导致高分子材料力学性能下降？",
+      "options": [
+        "A. 适度结晶",
+        "B. 氧化降解",
+        "C. 取向增强",
+        "D. 适度交联"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "氧化降解会破坏分子链结构，导致强度、韧性等性能下降。"
+    },
+    {
+      "questionText": "高弹态是高分子特有的力学状态，其主要成因是？",
+      "options": [
+        "A. 分子链高度结晶",
+        "B. 链段可运动但整链不能滑移",
+        "C. 分子完全自由流动",
+        "D. 分子链完全冻结"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "高弹态下链段可运动，大分子链不能整体滑移，表现出高弹性。"
+    },
+    {
+      "questionText": "ABS树脂属于哪种高分子类型？",
+      "options": [
+        "A. 均聚物",
+        "B. 无规共聚物",
+        "C. 接枝共聚物",
+        "D. 交替共聚物"
+      ],
+      "correctAnswerIndex": 2,
+      "explanation": "ABS为丙烯腈-丁二烯-苯乙烯接枝共聚物，兼具刚性与韧性。"
+    },
+    {
+      "questionText": "高分子材料的热稳定性主要取决于？",
+      "options": [
+        "A. 键能大小与分子结构",
+        "B. 外观颜色",
+        "C. 颗粒大小",
+        "D. 聚合方法"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "化学键能越高、结构越稳定，高分子热稳定性越好。"
+    },
+    {
+      "questionText": "拉伸取向会使高分子材料在取向方向上？",
+      "options": [
+        "A. 强度降低",
+        "B. 强度显著提高",
+        "C. 伸长率变大",
+        "D. 结晶度消失"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "拉伸取向使分子链沿受力方向规整排列，取向方向强度大幅提升。"
+    },
+    {
+      "questionText": "下列哪种高分子可作为橡胶使用？",
+      "options": [
+        "A. 聚苯乙烯",
+        "B. 天然橡胶",
+        "C. 聚甲基丙烯酸甲酯",
+        "D. 环氧树脂"
+      ],
+      "correctAnswerIndex": 1,
+      "explanation": "天然橡胶具有高弹性，是典型的橡胶类高分子材料。"
+    }
+  ]
+}
